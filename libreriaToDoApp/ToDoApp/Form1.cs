@@ -23,6 +23,7 @@ namespace ToDoApp
             try
             {
                 //estoy haciendo un cambio... 
+                //yo hice otro cambio
                 string CMD = string.Format("select username, password from usuarios where username ='jonathan'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String user = ds.Tables[0].Rows[0]["username"].ToString().Trim();
