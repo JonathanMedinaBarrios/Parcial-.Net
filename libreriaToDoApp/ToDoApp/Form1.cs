@@ -22,7 +22,7 @@ namespace ToDoApp
         {
             try
             {
-                string CMD = string.Format("select username, password from usuario where username ='jonathan'");
+                string CMD = string.Format("select username, password from usuarios where username ='jonathan'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String user = ds.Tables[0].Rows[0]["username"].ToString().Trim();
                 String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
