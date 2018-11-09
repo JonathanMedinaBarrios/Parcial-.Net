@@ -88,5 +88,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libreriaToDoApp\libreriaToDoApp.csproj">
+      <Project>{41549a67-4fa0-433b-bae1-d5b6ad2ec0c8}</Project>
+      <Name>libreriaToDoApp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
