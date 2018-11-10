@@ -34,7 +34,6 @@ namespace ToDoApp
                     Principal p = new Principal();
                     this.Visible = false;
                     p.Show();
-
                 }
 
             }
@@ -42,6 +41,16 @@ namespace ToDoApp
             {
                 MessageBox.Show("Usuario o contraseña incorrecta...");
                 String error = ""+exc; 
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Recuperacion_de_Contraseña recuperacion_De_Contraseña = new Recuperacion_de_Contraseña();
+            recuperacion_De_Contraseña.ShowDialog();
+            if (recuperacion_De_Contraseña.DialogResult == DialogResult.Yes)
+            {
+
             }
         }
     }
