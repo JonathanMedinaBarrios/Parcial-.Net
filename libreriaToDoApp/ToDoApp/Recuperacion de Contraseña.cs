@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace ToDoApp
 {
-    public partial class Principal : Form
+    public partial class Recuperacion_de_Contraseña : Form
     {
-        public Principal()
+        public Recuperacion_de_Contraseña()
         {
             InitializeComponent();
-        }
-
-        private void btnAgregarNodo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
