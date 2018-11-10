@@ -94,11 +94,12 @@
             // 
             // btnAgregarNodo
             // 
-            this.btnAgregarNodo.Location = new System.Drawing.Point(3, 3);
+            this.btnAgregarNodo.Location = new System.Drawing.Point(147, 3);
             this.btnAgregarNodo.Name = "btnAgregarNodo";
             this.btnAgregarNodo.Size = new System.Drawing.Size(39, 36);
             this.btnAgregarNodo.TabIndex = 0;
             this.btnAgregarNodo.UseVisualStyleBackColor = true;
+            this.btnAgregarNodo.Click += new System.EventHandler(this.btnAgregarNodo_Click);
             // 
             // tvGrupos
             // 
@@ -119,7 +120,7 @@
             this.gvTareas.Location = new System.Drawing.Point(3, 116);
             this.gvTareas.Name = "gvTareas";
             this.gvTareas.ReadOnly = true;
-            this.gvTareas.Size = new System.Drawing.Size(500, 258);
+            this.gvTareas.Size = new System.Drawing.Size(505, 281);
             this.gvTareas.TabIndex = 0;
             // 
             // ColumnIDTarea

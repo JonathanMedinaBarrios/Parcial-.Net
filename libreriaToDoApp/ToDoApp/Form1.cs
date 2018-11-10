@@ -23,12 +23,13 @@ namespace ToDoApp
             try
             {
                 //estoy haciendo un cambio... 
-                string CMD = string.Format("select username, password from usuarios where username ='jonathan'");
+                string CMD = string.Format("select username, password from usuarios where username ='"+this.texNombre.Text+"'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String user = ds.Tables[0].Rows[0]["username"].ToString().Trim();
                 String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
                 String clave = this.texContraseña.Text;
-                if (user == "jonathan" && contraseña == clave)
+                String usuario = this.texNombre.Text;
+                if (user == usuario && contraseña == clave)
                 {
                     Principal p = new Principal();
                     this.Visible = false;
@@ -39,7 +40,8 @@ namespace ToDoApp
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageBox.Show("Usuario o contraseña incorrecta...");
+                String error = ""+exc; 
             }
         }
     }
