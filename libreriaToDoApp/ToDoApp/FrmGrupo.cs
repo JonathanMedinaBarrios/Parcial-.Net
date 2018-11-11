@@ -13,20 +13,16 @@ namespace ToDoApp
 {
     public partial class FrmGrupo : Form
     {
-        public FrmGrupo()
+        public FrmGrupo(string padre)
         {
             InitializeComponent();
+            grupoPadre.Text = padre;
         }
 
         public Grupo GetGrupo()
         {
             return new Grupo() { Nombre = this.textBox1.Text };
         }
-
-        public void agregarNodoPadre(string nodoPadre) {
-            this.grupoPadre.Text = nodoPadre;  
-        }
-
 
     }
 }

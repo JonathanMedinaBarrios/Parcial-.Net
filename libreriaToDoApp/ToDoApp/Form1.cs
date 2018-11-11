@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using libreriaToDoApp.Modelo;
 using libreriaToDoApp; 
 
 namespace ToDoApp
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -23,16 +25,17 @@ namespace ToDoApp
             try
             {
                 //estoy haciendo un cambio... 
-                string CMD = string.Format("select username, password from usuarios where username ='"+this.texNombre.Text+"'");
+                string CMD = string.Format("select * from usuarios where username ='"+this.texNombre.Text+"'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String user = ds.Tables[0].Rows[0]["username"].ToString().Trim();
                 String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
+                int Idusuario = int.Parse(ds.Tables[0].Rows[0]["Id_usuario"].ToString().Trim());
                 String clave = this.texContraseña.Text;
                 String usuario = this.texNombre.Text;
                 if (user == usuario && contraseña == clave)
                 {
-                    Principal p = new Principal();
-                    this.Visible = false;
+                    Principal p = new Principal(Idusuario); ;
+                   this.Visible = false;
                     p.Show();
                 }
 

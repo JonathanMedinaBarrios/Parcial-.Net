@@ -16,11 +16,13 @@ namespace ToDoApp
     {
 
         public DataSet  data = null ;
-        string CMD; 
+        string CMD;
+        public int Id_usuario ; 
 
-        public Principal()
+        public Principal(int id)
         {
             InitializeComponent();
+            Id_usuario = id; 
             imprimirGrupo(1);
             tvGrupos.ExpandAll();
         }
@@ -29,12 +31,12 @@ namespace ToDoApp
 
         private void btnAgregarNodo_Click(object sender, EventArgs e)
         {
-            FrmGrupo frm = new FrmGrupo();
+            FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
             DialogResult resultado = frm.ShowDialog();
 
 
             TreeNode nodoSeleccionado = this.tvGrupos.SelectedNode;
-            frm.agregarNodoPadre("" + this.tvGrupos.SelectedNode);
+
             if (resultado == DialogResult.Yes)
             {
                 Grupo grupo = frm.GetGrupo();
@@ -84,7 +86,7 @@ namespace ToDoApp
 
         private void imprimirGrupo(int id){
 
-            CMD = "SELECT * FROM Grupos where Id_Usuario="+ id;
+            CMD = "SELECT * FROM Grupos where Id_Usuario="+ Id_usuario;
             data = Sql.Ejecutar(CMD);
 
             DataView dataViewHijos = new DataView(data.Tables[0]);
@@ -96,6 +98,12 @@ namespace ToDoApp
                 this.tvGrupos.Nodes.Add(nodo);
             }
                 
+        }
+
+        private void agregarTareas(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
+            DialogResult resultado = frm.ShowDialog();
         }
     }
 }

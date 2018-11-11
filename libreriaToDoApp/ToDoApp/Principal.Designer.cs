@@ -31,8 +31,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tvGrupos = new System.Windows.Forms.TreeView();
             this.btnAgregarNodo = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.gvTareas = new System.Windows.Forms.DataGridView();
             this.ColumnIDTarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,7 +43,6 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregarFila = new System.Windows.Forms.Button();
-            this.tvGrupos = new System.Windows.Forms.TreeView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -95,15 +95,13 @@
             this.splitContainer1.SplitterDistance = 204;
             this.splitContainer1.TabIndex = 0;
             // 
-            // button2
+            // tvGrupos
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.Image = global::ToDoApp.Properties.Resources.eliminar_2;
-            this.button2.Location = new System.Drawing.Point(50, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(37, 36);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = false;
+            this.tvGrupos.Location = new System.Drawing.Point(5, 45);
+            this.tvGrupos.Name = "tvGrupos";
+            this.tvGrupos.Size = new System.Drawing.Size(198, 352);
+            this.tvGrupos.TabIndex = 3;
+            this.tvGrupos.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.agregarTareas);
             // 
             // btnAgregarNodo
             // 
@@ -114,6 +112,16 @@
             this.btnAgregarNodo.TabIndex = 0;
             this.btnAgregarNodo.UseVisualStyleBackColor = true;
             this.btnAgregarNodo.Click += new System.EventHandler(this.btnAgregarNodo_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.Image = global::ToDoApp.Properties.Resources.eliminar_2;
+            this.button2.Location = new System.Drawing.Point(50, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(37, 36);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
@@ -187,13 +195,6 @@
             this.btnAgregarFila.Text = "Agregar tarea";
             this.btnAgregarFila.UseVisualStyleBackColor = true;
             this.btnAgregarFila.Click += new System.EventHandler(this.btnAgregarFila_Click);
-            // 
-            // tvGrupos
-            // 
-            this.tvGrupos.Location = new System.Drawing.Point(5, 45);
-            this.tvGrupos.Name = "tvGrupos";
-            this.tvGrupos.Size = new System.Drawing.Size(198, 352);
-            this.tvGrupos.TabIndex = 3;
             // 
             // Principal
             // 
