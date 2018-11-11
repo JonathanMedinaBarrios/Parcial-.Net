@@ -31,7 +31,14 @@ namespace ToDoApp
 
         private void btnAgregarNodo_Click(object sender, EventArgs e)
         {
-            FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
+
+            Ventana_agregar_grupos ventana_Agregar_Grupos = new Ventana_agregar_grupos();
+            ventana_Agregar_Grupos.ShowDialog();
+            if (ventana_Agregar_Grupos.DialogResult == DialogResult.Yes)
+            {
+
+            }
+                FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
             DialogResult resultado = frm.ShowDialog();
 
 
