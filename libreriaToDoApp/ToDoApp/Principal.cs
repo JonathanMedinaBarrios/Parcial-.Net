@@ -27,18 +27,15 @@ namespace ToDoApp
             tvGrupos.ExpandAll();
         }
 
+        public Principal()
+        {
 
+        }
 
         private void btnAgregarNodo_Click(object sender, EventArgs e)
         {
 
-            Ventana_agregar_grupos ventana_Agregar_Grupos = new Ventana_agregar_grupos();
-            ventana_Agregar_Grupos.ShowDialog();
-            if (ventana_Agregar_Grupos.DialogResult == DialogResult.Yes)
-            {
-
-            }
-                FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
+            FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
             DialogResult resultado = frm.ShowDialog();
 
 
@@ -75,9 +72,29 @@ namespace ToDoApp
 
         }
 
+
+        //agregar tareas 
         private void btnAgregarFila_Click(object sender, EventArgs e)
         {
+            FrmAgregarTareas frm = new FrmAgregarTareas(this.tvGrupos.SelectedNode.Text);
+            DialogResult resultado = frm.ShowDialog();
 
+            TreeNode nodoSeleccionado = this.tvGrupos.SelectedNode;
+
+            if (resultado == DialogResult.Yes)
+            {
+                Tarea tarea = frm.GetTarea();
+                CMD = "SELECT * FROM Grupos where nombre='" + nodoSeleccionado.Text + "'";
+                data = Sql.Ejecutar(CMD);
+                int id_grupo = int.Parse(data.Tables[0].Rows[0]["Id_Grupo"].ToString().Trim());
+                CMD = string.Format("INSERT INTO Tareas(Nombre,Prioridad,fechaInicio ,fechaFinalizacion,porcentaje,Id_Grupo)" +
+                                                   "VALUES ('" + tarea.Nombre + "'," + "'" + tarea.Prioridad + "', "
+                                                          + "'" + tarea.fechaInicio + "', "+ "'" + tarea.fechaFinal + "', " 
+                                                          + 50 + "," +id_grupo+ ")");
+                guardarNodo(CMD);
+                ActualizarTareas();
+                //this.gvTareas.Rows.Add("",""+tarea.Nombre,""+tarea.Prioridad,"",""+tarea.fechaInicio+);
+            }
         }
 
 
@@ -96,9 +113,9 @@ namespace ToDoApp
             CMD = "SELECT * FROM Grupos where Id_Usuario="+ Id_usuario;
             data = Sql.Ejecutar(CMD);
 
-            DataView dataViewHijos = new DataView(data.Tables[0]);
+            DataView datos = new DataView(data.Tables[0]);
 
-            foreach (DataRowView dataRowCurrent in dataViewHijos)
+            foreach (DataRowView dataRowCurrent in datos)
             {
                 TreeNode nodo = new TreeNode();
                 nodo.Text = dataRowCurrent["nombre"].ToString().Trim();
@@ -107,10 +124,32 @@ namespace ToDoApp
                 
         }
 
-        private void agregarTareas(object sender, TreeNodeMouseClickEventArgs e)
+
+        private void VerTareas(object sender, TreeNodeMouseClickEventArgs e)
         {
-            FrmGrupo frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
-            DialogResult resultado = frm.ShowDialog();
+            ActualizarTareas(); 
+        }
+
+        private void ActualizarTareas() {
+            TreeNode nodoSeleccionado = this.tvGrupos.SelectedNode;
+            CMD = "SELECT * FROM Grupos where nombre='" + nodoSeleccionado.Text + "'";
+            data = Sql.Ejecutar(CMD);
+            int id_grupo = int.Parse(data.Tables[0].Rows[0]["Id_Grupo"].ToString().Trim());
+            CMD = "SELECT * FROM tareas WHERE Id_Grupo =" + id_grupo;
+
+            data = Sql.Ejecutar(CMD);
+            DataView datos = new DataView(data.Tables[0]);
+            gvTareas.Rows.Clear();
+
+            foreach (DataRowView dataRowCurrent in datos)
+            {
+                DataGridViewRow fila = new DataGridViewRow();
+                int i = gvTareas.Rows.Add();
+                gvTareas.Rows[i].Cells["IdTarea"].Value = dataRowCurrent["id_tarea"].ToString().Trim();
+                gvTareas.Rows[i].Cells["Nombre"].Value = dataRowCurrent["nombre"].ToString().Trim();
+                gvTareas.Rows[i].Cells["Prioridad"].Value = dataRowCurrent["prioridad"].ToString().Trim();
+                gvTareas.Rows[i].Cells["Porcentaje"].Value = dataRowCurrent["porcentaje"].ToString().Trim();
+            }
         }
     }
 }

@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelo\Grupo.cs" />
+    <Compile Include="Modelo\Tarea.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Sql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

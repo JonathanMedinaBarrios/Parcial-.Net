@@ -36,13 +36,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.gvTareas = new System.Windows.Forms.DataGridView();
-            this.ColumnIDTarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregarFila = new System.Windows.Forms.Button();
+            this.IdTarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -101,7 +101,7 @@
             this.tvGrupos.Name = "tvGrupos";
             this.tvGrupos.Size = new System.Drawing.Size(198, 352);
             this.tvGrupos.TabIndex = 3;
-            this.tvGrupos.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.agregarTareas);
+            this.tvGrupos.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.VerTareas);
             // 
             // btnAgregarNodo
             // 
@@ -138,53 +138,17 @@
             this.gvTareas.AllowUserToDeleteRows = false;
             this.gvTareas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvTareas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnIDTarea,
-            this.ColumnNombre,
-            this.Column1,
-            this.Column4,
-            this.Column5,
-            this.Column6});
+            this.IdTarea,
+            this.Nombre,
+            this.Prioridad,
+            this.Porcentaje,
+            this.FechaInicio,
+            this.FechaFinal});
             this.gvTareas.Location = new System.Drawing.Point(16, 45);
             this.gvTareas.Name = "gvTareas";
             this.gvTareas.ReadOnly = true;
             this.gvTareas.Size = new System.Drawing.Size(645, 352);
             this.gvTareas.TabIndex = 0;
-            // 
-            // ColumnIDTarea
-            // 
-            this.ColumnIDTarea.HeaderText = "ID Tarea";
-            this.ColumnIDTarea.Name = "ColumnIDTarea";
-            this.ColumnIDTarea.ReadOnly = true;
-            // 
-            // ColumnNombre
-            // 
-            this.ColumnNombre.HeaderText = "Nombre";
-            this.ColumnNombre.Name = "ColumnNombre";
-            this.ColumnNombre.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Prioridad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Porcentaje";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Fecha de inicio";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Fecha de finalizacion";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
             // 
             // btnAgregarFila
             // 
@@ -195,6 +159,42 @@
             this.btnAgregarFila.Text = "Agregar tarea";
             this.btnAgregarFila.UseVisualStyleBackColor = true;
             this.btnAgregarFila.Click += new System.EventHandler(this.btnAgregarFila_Click);
+            // 
+            // IdTarea
+            // 
+            this.IdTarea.HeaderText = "ID Tarea";
+            this.IdTarea.Name = "IdTarea";
+            this.IdTarea.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.HeaderText = "Prioridad";
+            this.Prioridad.Name = "Prioridad";
+            this.Prioridad.ReadOnly = true;
+            // 
+            // Porcentaje
+            // 
+            this.Porcentaje.HeaderText = "Porcentaje";
+            this.Porcentaje.Name = "Porcentaje";
+            this.Porcentaje.ReadOnly = true;
+            // 
+            // FechaInicio
+            // 
+            this.FechaInicio.HeaderText = "Fecha de inicio";
+            this.FechaInicio.Name = "FechaInicio";
+            this.FechaInicio.ReadOnly = true;
+            // 
+            // FechaFinal
+            // 
+            this.FechaFinal.HeaderText = "Fecha de finalizacion";
+            this.FechaFinal.Name = "FechaFinal";
+            this.FechaFinal.ReadOnly = true;
             // 
             // Principal
             // 
@@ -224,13 +224,13 @@
         private System.Windows.Forms.DataGridView gvTareas;
         private System.Windows.Forms.Button btnAgregarFila;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIDTarea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TreeView tvGrupos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdTarea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prioridad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Porcentaje;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaInicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaFinal;
     }
 }

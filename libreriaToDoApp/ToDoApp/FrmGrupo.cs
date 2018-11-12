@@ -23,6 +23,5 @@ namespace ToDoApp
         {
             return new Grupo() { Nombre = this.textBox1.Text };
         }
-
     }
 }
