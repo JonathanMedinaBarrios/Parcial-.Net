@@ -36,13 +36,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.gvTareas = new System.Windows.Forms.DataGridView();
-            this.btnAgregarFila = new System.Windows.Forms.Button();
             this.IdTarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAgregarFila = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -131,6 +131,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Remover tarea";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnRemoverTareas);
             // 
             // gvTareas
             // 
@@ -149,16 +150,6 @@
             this.gvTareas.ReadOnly = true;
             this.gvTareas.Size = new System.Drawing.Size(645, 352);
             this.gvTareas.TabIndex = 0;
-            // 
-            // btnAgregarFila
-            // 
-            this.btnAgregarFila.Location = new System.Drawing.Point(21, 16);
-            this.btnAgregarFila.Name = "btnAgregarFila";
-            this.btnAgregarFila.Size = new System.Drawing.Size(95, 23);
-            this.btnAgregarFila.TabIndex = 1;
-            this.btnAgregarFila.Text = "Agregar tarea";
-            this.btnAgregarFila.UseVisualStyleBackColor = true;
-            this.btnAgregarFila.Click += new System.EventHandler(this.btnAgregarFila_Click);
             // 
             // IdTarea
             // 
@@ -195,6 +186,16 @@
             this.FechaFinal.HeaderText = "Fecha de finalizacion";
             this.FechaFinal.Name = "FechaFinal";
             this.FechaFinal.ReadOnly = true;
+            // 
+            // btnAgregarFila
+            // 
+            this.btnAgregarFila.Location = new System.Drawing.Point(21, 16);
+            this.btnAgregarFila.Name = "btnAgregarFila";
+            this.btnAgregarFila.Size = new System.Drawing.Size(95, 23);
+            this.btnAgregarFila.TabIndex = 1;
+            this.btnAgregarFila.Text = "Agregar tarea";
+            this.btnAgregarFila.UseVisualStyleBackColor = true;
+            this.btnAgregarFila.Click += new System.EventHandler(this.btnAgregarFila_Click);
             // 
             // Principal
             // 

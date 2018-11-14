@@ -19,6 +19,11 @@ namespace ToDoApp
             grupoPadre.Text = padre;
         }
 
+        public FrmGrupo() {
+            InitializeComponent();
+
+        }
+
         public Grupo GetGrupo()
         {
             return new Grupo() { Nombre = this.textBox1.Text };
