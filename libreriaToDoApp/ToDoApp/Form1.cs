@@ -53,7 +53,7 @@ namespace ToDoApp
             recuperacion_De_Contraseña.ShowDialog();
             if (recuperacion_De_Contraseña.DialogResult == DialogResult.Yes)
             {
-
+                //aqui //ok
             }
         }
     }

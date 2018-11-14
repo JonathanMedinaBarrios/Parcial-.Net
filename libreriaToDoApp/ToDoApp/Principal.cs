@@ -193,5 +193,9 @@ namespace ToDoApp
             string celda = gvTareas.CurrentCell.Value.ToString();
             MessageBox.Show(celda);
         }
+
+        private string formatoFecha(string fehca) {
+            return "";
+        }
     }
 }
