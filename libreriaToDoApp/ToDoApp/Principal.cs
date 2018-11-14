@@ -31,18 +31,22 @@ namespace ToDoApp
         {
 
         }
+        //Region de los botone de la vista principal  
+        #region Botones  
 
+        //Agregar Grupo 
         private void btnAgregarNodo_Click(object sender, EventArgs e)
         {
 
             TreeNode nodoSeleccionado = this.tvGrupos.SelectedNode;
-            FrmGrupo frm; 
+            FrmGrupo frm;
             if (nodoSeleccionado != null)
             {
                 frm = new FrmGrupo(this.tvGrupos.SelectedNode.Text);
             }
-            else {
-                frm = new FrmGrupo(); 
+            else
+            {
+                frm = new FrmGrupo();
             }
 
             DialogResult resultado = frm.ShowDialog();
@@ -58,25 +62,24 @@ namespace ToDoApp
                 if (nodoSeleccionado != null)
                 {
                     CMD = "SELECT buscarIdgrupo('" + nodoSeleccionado.Text + "')";
-                    data = Sql.Ejecutar(CMD);
+                    data = ejecutar(CMD);
                     int id_grupo = int.Parse(data.Tables[0].Rows[0]["buscarIdgrupo"].ToString().Trim());
                     CMD = string.Format("INSERT INTO Grupos(Nombre, Id_Usuario,Id_GrupoPadre)" +
-                                                   "VALUES ('" + nodo.Text + "'," + Id_usuario + ","+id_grupo + ")");
-                    guardar(CMD);
+                                                   "VALUES ('" + nodo.Text + "'," + Id_usuario + "," + id_grupo + ")");
+                    Ejecutar2(CMD);
                     nodoSeleccionado.Nodes.Add(nodo);
-                    this.tvGrupos.SelectedNode = null; 
+                    this.tvGrupos.SelectedNode = null;
                 }
                 else
                 {
                     //Raiz
                     this.tvGrupos.Nodes.Add(nodo);
                     CMD = string.Format("SElECT GuadarGrupoPadre('" + nodo.Text + "'," + Id_usuario + ")");
-                    guardar(CMD);
+                    Ejecutar2(CMD);
                 }
             }
 
         }
-
 
         //agregar tareas 
         private void btnAgregarFila_Click(object sender, EventArgs e)
@@ -99,20 +102,40 @@ namespace ToDoApp
                     CMD = "SELECT buscarIdgrupo('" + nodoSeleccionado.Text + "')"; //Procedimiento almacenado
                     data = Sql.Ejecutar(CMD);
                     int id_grupo = int.Parse(data.Tables[0].Rows[0]["buscarIdgrupo"].ToString().Trim());
-                    CMD = "SELECT GuardarTareas ('" + tarea.Nombre + "'," + "'" + tarea.Prioridad + "', "
+                    CMD = "SELECT insertarTareas ('" + tarea.Nombre + "'," + "'" + tarea.Prioridad + "', "
                                               + "'" + tarea.fechaInicio + "', " + "'" + tarea.fechaFinal + "', "
                                                     + 50 + "," + id_grupo + ")"; //Procedimiento almacenado guardarTareas 
-                    guardar(CMD);
+                    Ejecutar2(CMD);
                     ActualizarTareas();
                     //this.gvTareas.Rows.Add("",""+tarea.Nombre,""+tarea.Prioridad,"",""+tarea.fechaInicio+);
                 }
             }
         }
 
+        //Revover tareas 
+        private void btnRemoverTareas(object sender, EventArgs e)
+        {
+            try
+            {
+                string id_celda = gvTareas.CurrentCell.Value.ToString();
+                CMD = "Select EliminarTareas(" + id_celda + ")";
+                Sql.Ejecutar2(CMD);
+                ActualizarTareas();
+            }
+            catch {
+               MessageBox.Show("Debe selecionar una celda");
+            }            
+        }
+
+
+        #endregion
+
+
+        #region metodos para imprimir los grupos del usuario
 
         private void imprimirGruposRaiz(int id_usuario){
             CMD = "SELECT * FROM Grupos where Id_Usuario="+ Id_usuario+ "and Id_grupopadre is null";
-            data = Sql.Ejecutar(CMD);
+            data = ejecutar(CMD);
 
             DataView datos = new DataView(data.Tables[0]);
 
@@ -129,7 +152,7 @@ namespace ToDoApp
         private void CrearGruposHijos(int indicePadre, TreeNode nodePadre)
         {
             CMD = "SELECT * FROM Grupos where Id_Usuario=" + Id_usuario + "and Id_grupopadre="+ indicePadre;
-            DataSet datas = Sql.Ejecutar(CMD);
+            DataSet datas = ejecutar(CMD);
 
             DataView datos = new DataView(datas.Tables[0]);
 
@@ -144,21 +167,28 @@ namespace ToDoApp
             }
         }
 
+        #endregion
 
-            private void VerTareas(object sender, TreeNodeMouseClickEventArgs e)
+
+        private void VerTareas(object sender, TreeNodeMouseClickEventArgs e)
         {
            ActualizarTareas();          
         }
 
 
+
+
+        //METODO QUE CONSULTA LAS TAREAS ASOCIADAD A CADA GRUPO 
+
         private void ActualizarTareas() {
+
             TreeNode nodoSeleccionado = this.tvGrupos.SelectedNode;
             CMD = "SELECT * FROM Grupos where nombre='" + nodoSeleccionado.Text + "'";
-            data = Sql.Ejecutar(CMD);
+            data = ejecutar(CMD);
             int id_grupo = int.Parse(data.Tables[0].Rows[0]["Id_Grupo"].ToString().Trim());
             CMD = "SELECT * FROM tareas WHERE Id_Grupo =" + id_grupo;
 
-            data = Sql.Ejecutar(CMD);
+            data = ejecutar(CMD);
             DataView datos = new DataView(data.Tables[0]);
             gvTareas.Rows.Clear();
 
@@ -175,23 +205,33 @@ namespace ToDoApp
             }
         }
 
-        private void guardar(string cmd)
+       
+
+        private void Ejecutar2(string cmd)
         {
             try
             {
-                Sql.Ejecutar(cmd);
+                Sql.Ejecutar2(cmd);
             }
             catch (Exception exc)
             {
-                MessageBox.Show(""+exc);
+                MessageBox.Show("" + exc);
                 String error = "" + exc;
             }
         }
 
-        private void btnRemoverTareas(object sender, EventArgs e)
+        private DataSet ejecutar(string cmd)
         {
-            string celda = gvTareas.CurrentCell.Value.ToString();
-            MessageBox.Show(celda);
+            try
+            {
+                return Sql.Ejecutar(cmd);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("" + exc);
+                String error = "" + exc;
+                return null; 
+            }
         }
     }
 }

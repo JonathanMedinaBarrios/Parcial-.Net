@@ -11,16 +11,25 @@ namespace libreriaToDoApp
 {
     public class Sql
     {
-        public static DataSet Ejecutar(string cmd)
+        static NpgsqlConnection con = new NpgsqlConnection("Server=localhost; User Id=postgres;Password=proyecto;Database =todoapp; Integrated Security =True");
+
+
+        public static DataSet Ejecutar(string cmd) // ejecuta procedimiento almacenado de consultar 
         {
 
-            NpgsqlConnection con = new NpgsqlConnection("Server=localhost; User Id=postgres;Password=proyecto;Database =todoapp; Integrated Security =True");
             con.Open();
             DataSet DS = new DataSet();
             NpgsqlDataAdapter DP = new NpgsqlDataAdapter(cmd, con);
             DP.Fill(DS);
             con.Close();
             return DS;
+        }
+
+        public static void Ejecutar2(String cmd) { // ejecutar procedimiento de guardar y eliminar 
+            con.Open();
+            NpgsqlCommand sentencia = new NpgsqlCommand(cmd, con);
+            sentencia.ExecuteScalar();
+            con.Close();
         }
     }
 }
