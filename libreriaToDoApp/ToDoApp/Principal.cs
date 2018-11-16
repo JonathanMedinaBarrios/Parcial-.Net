@@ -64,8 +64,7 @@ namespace ToDoApp
                     CMD = "SELECT buscarIdgrupo('" + nodoSeleccionado.Text + "')";
                     data = ejecutar(CMD);
                     int id_grupo = int.Parse(data.Tables[0].Rows[0]["buscarIdgrupo"].ToString().Trim());
-                    CMD = string.Format("INSERT INTO Grupos(Nombre, Id_Usuario,Id_GrupoPadre)" +
-                                                   "VALUES ('" + nodo.Text + "'," + Id_usuario + "," + id_grupo + ")");
+                    CMD = string.Format("Select guadargrupohijo('" + nodo.Text + "'," + Id_usuario + "," + id_grupo + ")");
                     Ejecutar2(CMD);
                     nodoSeleccionado.Nodes.Add(nodo);
                     this.tvGrupos.SelectedNode = null;
@@ -236,6 +235,11 @@ namespace ToDoApp
 
         private string formatoFecha(string fehca) {
             return "";
+        }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

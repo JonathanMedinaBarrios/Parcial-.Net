@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DateTimePicker dateFinal;
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.textTarea = new System.Windows.Forms.TextBox();
@@ -35,9 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateFinal = new System.Windows.Forms.DateTimePicker();
             this.dateInicial = new System.Windows.Forms.DateTimePicker();
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
+            dateFinal = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -105,17 +106,25 @@
             // 
             // dateFinal
             // 
-            this.dateFinal.Location = new System.Drawing.Point(214, 127);
-            this.dateFinal.Name = "dateFinal";
-            this.dateFinal.Size = new System.Drawing.Size(153, 20);
-            this.dateFinal.TabIndex = 25;
+            dateFinal.CustomFormat = "";
+            dateFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dateFinal.Location = new System.Drawing.Point(214, 127);
+            dateFinal.Name = "dateFinal";
+            dateFinal.Size = new System.Drawing.Size(153, 20);
+            dateFinal.TabIndex = 25;
+            dateFinal.Value = new System.DateTime(2018, 11, 14, 21, 14, 42, 0);
+            dateFinal.ValueChanged += new System.EventHandler(this.dateFinal_ValueChanged);
             // 
             // dateInicial
             // 
+            this.dateInicial.CustomFormat = "";
+            this.dateInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateInicial.Location = new System.Drawing.Point(8, 127);
             this.dateInicial.Name = "dateInicial";
             this.dateInicial.Size = new System.Drawing.Size(153, 20);
             this.dateInicial.TabIndex = 26;
+            this.dateInicial.Value = new System.DateTime(2018, 11, 14, 21, 4, 28, 0);
+            this.dateInicial.ValueChanged += new System.EventHandler(this.dateInicial_ValueChanged);
             // 
             // cmbPrioridad
             // 
@@ -136,7 +145,7 @@
             this.ClientSize = new System.Drawing.Size(379, 241);
             this.Controls.Add(this.cmbPrioridad);
             this.Controls.Add(this.dateInicial);
-            this.Controls.Add(this.dateFinal);
+            this.Controls.Add(dateFinal);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -146,6 +155,7 @@
             this.Controls.Add(this.label3);
             this.Name = "FrmAgregarTareas";
             this.Text = "FrmAgregarTareas";
+            this.Load += new System.EventHandler(this.FrmAgregarTareas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,7 +170,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateFinal;
         private System.Windows.Forms.DateTimePicker dateInicial;
         private System.Windows.Forms.ComboBox cmbPrioridad;
     }

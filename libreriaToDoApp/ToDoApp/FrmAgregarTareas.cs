@@ -27,5 +27,20 @@ namespace ToDoApp
                 fechaFinal = DateTime.Parse(this.dateFinal.Text),
             }; 
         }
+
+        private void dateInicial_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmAgregarTareas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateFinal_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

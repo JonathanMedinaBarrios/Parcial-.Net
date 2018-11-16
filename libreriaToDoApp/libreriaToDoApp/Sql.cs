@@ -11,7 +11,7 @@ namespace libreriaToDoApp
 {
     public class Sql
     {
-        static NpgsqlConnection con = new NpgsqlConnection("Server=localhost; User Id=postgres;Password=proyecto;Database =todoapp; Integrated Security =True");
+        static NpgsqlConnection con = new NpgsqlConnection("Server=localhost; User Id=postgres;Password=proyecto;Database =parcial; Integrated Security =True");
 
 
         public static DataSet Ejecutar(string cmd) // ejecuta procedimiento almacenado de consultar 

@@ -16,5 +16,10 @@ namespace ToDoApp
         {
             InitializeComponent();
         }
+
+        public String GetCorreo()
+        {
+            return this.textCorreo.Text; 
+        }
     }
 }
