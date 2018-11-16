@@ -233,5 +233,9 @@ namespace ToDoApp
                 return null; 
             }
         }
+
+        private string formatoFecha(string fehca) {
+            return "";
+        }
     }
 }
