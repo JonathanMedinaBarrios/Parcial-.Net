@@ -17,7 +17,6 @@ namespace ToDoApp
     public partial class Form1 : Form
     {
 
-        String contraseña;
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +30,7 @@ namespace ToDoApp
                 string CMD = string.Format("select * from usuarios where username ='"+this.texNombre.Text+"'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String user = ds.Tables[0].Rows[0]["username"].ToString().Trim();
-                contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
+                String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
                 int Idusuario = int.Parse(ds.Tables[0].Rows[0]["Id_usuario"].ToString().Trim());
                 String clave = this.texContraseña.Text;
                 String usuario = this.texNombre.Text;
@@ -56,20 +55,23 @@ namespace ToDoApp
             recuperacion_De_Contraseña.ShowDialog();
             if (recuperacion_De_Contraseña.DialogResult == DialogResult.Yes)
             {
-                string CMD = string.Format("select * from usuarios where username ='" +recuperacion_De_Contraseña.GetCorreo()+ "'");
+                string CMD = string.Format("select * from usuarios where username ='" + recuperacion_De_Contraseña.getNombre() + "'");
                 DataSet ds = Sql.Ejecutar(CMD);
                 String correo = ds.Tables[0].Rows[0]["email"].ToString().Trim();
-                MessageBox.Show(correo);
-                var Mensaje = new MailMessage();
-                Mensaje.To.Add(new MailAddress(correo);
-                Mensaje.Subject = "Recuperar  contraseña";
-                Mensaje.Body = "Contraseña:" + contraseña + ".";
-                Mensaje.IsBodyHtml = true;
+                String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
+                var email = new MailMessage();
+                email.To.Add(new MailAddress(correo));
+                email.From = new MailAddress("parcialtodoapp@gmail.com");
+                email.Subject = "Recordatorio de contraseña";
+                email.Body = "Su contraseña es " + contraseña + ".";
+                email.IsBodyHtml = true;
 
-                using (var smtp = new SmtpClient()){
-                    var credencial = new NetworkCredential{
-                        UserName = "gttodolist@gmail.com",
-                        Password = "todolist2018",
+                using (var smtp = new SmtpClient())
+                {
+                    var credencial = new NetworkCredential
+                    {
+                        UserName = "parcialtodoapp@gmail.com",
+                        Password = "p1478963",
                     };
 
                     smtp.Credentials = credencial;
@@ -77,15 +79,10 @@ namespace ToDoApp
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
 
-
-                    smtp.Send(Mensaje);
+                    
+                    smtp.Send(email);
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

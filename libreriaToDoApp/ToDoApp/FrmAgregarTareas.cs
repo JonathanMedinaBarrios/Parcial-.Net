@@ -23,8 +23,8 @@ namespace ToDoApp
             return new Tarea() {
                 Nombre = this.textTarea.Text,
                 Prioridad = cmbPrioridad.Text,
-                fechaInicio = DateTime.Parse(this.dateInicial.Text),
-                fechaFinal = DateTime.Parse(this.dateFinal.Text),
+                fechaInicio =DateTime.Parse(dateInicial.Value.ToString("yyyy-MM-dd")),
+                fechaFinal = DateTime.Parse(dateFinal.Value.ToString("yyyy-MM-dd")),
             }; 
         }
 

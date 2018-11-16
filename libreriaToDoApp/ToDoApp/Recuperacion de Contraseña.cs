@@ -17,8 +17,7 @@ namespace ToDoApp
             InitializeComponent();
         }
 
-        public String GetCorreo()
-        {
+        public string getNombre() {
             return this.textCorreo.Text; 
         }
     }
