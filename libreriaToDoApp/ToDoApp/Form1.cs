@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using libreriaToDoApp.Modelo;
-using libreriaToDoApp; 
+using libreriaToDoApp;
+using System.Net;
+using System.Net.Mail;
 
 namespace ToDoApp
 {
@@ -53,7 +55,33 @@ namespace ToDoApp
             recuperacion_De_Contraseña.ShowDialog();
             if (recuperacion_De_Contraseña.DialogResult == DialogResult.Yes)
             {
+                string CMD = string.Format("select * from usuarios where username ='" + recuperacion_De_Contraseña.getNombre() + "'");
+                DataSet ds = Sql.Ejecutar(CMD);
+                String correo = ds.Tables[0].Rows[0]["email"].ToString().Trim();
+                String contraseña = ds.Tables[0].Rows[0]["password"].ToString().Trim();
+                var email = new MailMessage();
+                email.To.Add(new MailAddress(correo));
+                email.From = new MailAddress("parcialtodoapp@gmail.com");
+                email.Subject = "Recordatorio de contraseña";
+                email.Body = "Su contraseña es " + contraseña + ".";
+                email.IsBodyHtml = true;
 
+                using (var smtp = new SmtpClient())
+                {
+                    var credencial = new NetworkCredential
+                    {
+                        UserName = "parcialtodoapp@gmail.com",
+                        Password = "p1478963",
+                    };
+
+                    smtp.Credentials = credencial;
+                    smtp.Host = "smtp.gmail.com"; 
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+
+
+                    smtp.Send(email);
+                }
             }
         }
     }
